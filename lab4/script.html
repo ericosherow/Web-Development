@@ -1,0 +1,25 @@
+<head>
+	<title></title>
+	<meta>
+	<script>
+		fumction hightlight() 
+		{
+			//captures all paragraph elements 
+			paragraphs = documents.getElementsByTagName('p'); 
+
+			//do it this way and don't change css 
+			for (i = 0; i < paragraphs.length; i++)
+			{
+				//for text extraction 
+					// console.log(paragraphs[i].innerHTML); 
+				paragraphs[i].style.backgroundColor = "yellow"; 
+			}
+		}
+
+	</script>
+</head>
+<body>
+
+<h1 onclick="hightlight();" >CLICK ME </h1> 
+
+</body>
