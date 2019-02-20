@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+video.currentTime<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
@@ -11,7 +11,7 @@
 <h1 id="title">Union Strike Folk Song</h1>
 
 <video src="https://www.cs.tufts.edu/comp/20/butwehavethepower.mp4" id="butwehavethepower" controls></video>
-<p>Time (in seconds): <span id="timer"></span></p>
+
 <div id="lyrics"></div>
 
 
@@ -19,29 +19,80 @@
 	// access elems 
 	var video = document.getElementById("butwehavethepower");
 	var lyrics = document.getElementById("lyrics");
-	var timer = document.getElementById("timer");
+	// var timer = document.getElementById("timer");
 
-	timer = video.currentTime
 
 
 	video.addEventListener("timeupdate", function() {	
 		
 
-	console.log("timer")
+// 		Lisa:
+// Come gather round, children,
+// It's high time ye learned
+// 'Bout a hero named Homer
+// And a devil named Burns.
 
-	var captions = ["Come gather round, children", "It's high time ye learned", 
-				    "'Bout a hero named Homer", "And a devil named Burns.", 
-				    "We'll march 'till we drop", "The girls and the fellas.", 
-				    "We'll fight 'till the death", "Or else fold like umbrellas.", 
-				    "So we'll march day and night", "By the big cooling tower.", 
-				    "They have the plant", "But we have the power.",
-				    "Now do 'Classical Gas!'", "So we'll march day and night",
-					"By the big cooling tower.", "They have the plant", 
-					"But we have the power."]
+// We'll march 'till we drop 
+// The girls and the fellas.
+// We'll fight 'till the death 
+// Or else fold like umbrellas.
+
+// So we'll march day and night
+// By the big cooling tower.
+// They have the plant
+
+// But we have the power.
+
+// Lenny:
+// Now do "Classical Gas!"
+
+// So we'll march day and night
+// By the big cooling tower.
+// They have the plant
+
+// But we have the power.
 
 
-	if (video.currentTime == 5)
-		lyrics.innerHTML = captions[0]
+
+	//set range 
+	if (video.currentTime > 6 && video.currentTime < 7.5)
+		lyrics.innerHTML = "Come gather round, children";
+	if (video.currentTime > 8 &&video.currentTime < 11)
+		lyrics.innerHTML = "It's high time ye learned"; 
+	if (video.currentTime > 11.5 &&video.currentTime < 12)
+		lyrics.innerHTML = "'Bout a hero named Homer";
+	if (video.currentTime > 13 &&video.currentTime < 15.5)
+		lyrics.innerHTML = "And a devil named Burns.";
+	if (video.currentTime > 17 &&video.currentTime < 18.5)
+		lyrics.innerHTML = "We'll march 'till we drop";
+	if (video.currentTime > 19 &&video.currentTime < 20.5)
+		lyrics.innerHTML = "The girls and the fellas.";
+	if (video.currentTime > 21 &&video.currentTime < 22.5 )
+		lyrics.innerHTML = "We'll fight 'till the death";
+	if (video.currentTime > 23 &&video.currentTime < 26.5)
+		lyrics.innerHTML = "Or else fold like umbrellas.";
+	if (video.currentTime > 38 &&video.currentTime < 39.5)
+		lyrics.innerHTML = "So we'll march day and night";
+	if (video.currentTime > 40 &&video.currentTime < 43)
+		lyrics.innerHTML = "By the big cooling tower.";
+	if (video.currentTime > 43.5 &&video.currentTime < 45)
+		lyrics.innerHTML = "They have the plant";
+	if (video.currentTime >45 &&video.currentTime < 49)
+		lyrics.innerHTML = "But we have the power.";
+	if (video.currentTime > 50 && video.currentTime < 51)
+		lyrics.innerHTML = "Now do Classical Gas!";
+
+	if (video.currentTime > 73 && video.currentTime < 74.5)
+		lyrics.innerHTML = "So we'll march day and night";
+	if (video.currentTime > 75 && video.currentTime < 77 )
+		lyrics.innerHTML = "By the big cooling tower.";
+	if (video.currentTime > 78 && video.currentTime < 81.5)
+		lyrics.innerHTML = "They have the plant";
+	if (video.currentTime > 82 && video.currentTime < 83.5)
+		lyrics.innerHTML = "But we have the power.";
+
+
+
 	
 	
 		// while (video.currentTime > 0)
@@ -53,7 +104,7 @@
 
 
 
-	
-</script>
-</body>
+	video.currentTime
+</script>video.currentTime
+</body>video.currentTime
 </html>	
