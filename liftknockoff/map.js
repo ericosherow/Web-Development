@@ -149,7 +149,6 @@ function vehPopulate(parsedData)
 //updates Me location (if new vehicle is closest to you)
 function updateMe(name, distance)
 {
-	console.log("vehicle distance::", distance);
 
 	if (name == "WEINERMOBILE") {
 		if (nearestWeiner == 0){
@@ -171,10 +170,7 @@ function updateMe(name, distance)
 			return; 
 		}
 
-		console.log(nearestVeh,"= nearestVeh;", distance, "=distance;" );
-
 		if (distance < nearestVeh){
-			console.log("SECOND IF");
 			nearestVeh = distance; 
 			markers[0].setTitle(markers[0].title + " " + "Distance to nearest vehicle:" + distance + "<br>"); 
 		}
