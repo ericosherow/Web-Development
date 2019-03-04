@@ -11,8 +11,8 @@
 	};
 	var map;
 	var marker;
-	var nearestPassenger = 0.0; 
-	var nearestWeiner = 0.0; 
+	var nearestVeh = 0; 
+	var nearestWeiner = 0; 
 	var infowindow = new google.maps.InfoWindow();
 	var markers = []; 
 
@@ -40,9 +40,9 @@
 		map.panTo(me);
 		
 		marker = new google.maps.Marker({
-			icon: "flower.png",
+			icon: "images/flower.png",
 			position: me,
-			title: "Here I Am!"
+			title: "This is me!<br>" 
 		});
 		markers.push(marker);
 
@@ -55,7 +55,6 @@
 		});
 
 		getJSON(); 
-		console.log(markers[0], "ME"); 
 
 }
 
@@ -70,65 +69,53 @@ function getJSON() {
 		if (request.readyState == 4 && request.status == 200){		
 			parsedData = JSON.parse(request.responseText); //global
 			console.log(parsedData);/*------*/
-			populate(parsedData);
+			filterPopulate(parsedData);
 		}	
 	};
 	//SEND LAT/LONG/USERNAME 
 	request.send("username=CtmjKvK9&lat=" + myLat + "&lng=" + myLng); //makes request ready 
 }
 
-//create markers from json 
-function populate(parsedData)
+//deterine whether to populate passengers, vehicles, or both 
+function filterPopulate(parsedData)
 {
-	console.log(parsedData.vehicles.length, "LENGTH");
-	for (i = 0; i < parsedData.vehicles.length; i++) {
-		var vehPos = new google.maps.LatLng(parsedData.vehicles[i].lat,parsedData.vehicles[i].lng);
-		var name = parsedData.vehicles[i].username;
+	if (parsedData.vehicles !== 'undefined')
+		vehPopulate(parsedData);
+
+	else if (parsedData.passengers !== 'undefined')
+		passPopulate(parsedData); 
+
+}
+
+
+function passPopulate()
+{
+	for (i = 0; i < parsedData.passengers.length; i++) {
+		var passPos = new google.maps.LatLng(parsedData.passengers[i].lat,parsedData.passengers[i].lng);
+		var name = parsedData.passengers[i].username;
 		//convert to miles
-		var distance = ((google.maps.geometry.spherical.computeDistanceBetween(vehPos, me)) 
+		var distance = ((google.maps.geometry.spherical.computeDistanceBetween(passPos, me)) 
 		 * 0.000621371192);
 
-		console.log(parsedData.vehicles[i].lat,parsedData.vehicles[i].lng);	
-
-		console.log(name); 
-
 		if (name == "WEINERMOBILE") {
-			markWeiner(vehPos, name, distance);
+			markWeiner(passPos, name, distance);
 			updateMe(name, distance);
 		}
 		else {
-			markPassenger(vehPos,name);
+			markPassenger(passPos,name);
 			updateMe(name,distance);
 		}		
 	}
 }
-//updates Me location (if a new vehicle is closest to you)
-function updateMe(name, distance)
-{
 
-	if (name == "WEINERMOBILE") {
-		if (nearestWeiner == 0)
-			nearestWeiner = distance;
-
-		if (distance <= nearestWeiner)
-			markers[0].setTitle("This is me!" + " " + "Distance to nearest WEINERMOBILE:" + distance); 
-	}
-	else {
-		if (nearestPassenger == 0)
-			nearestPassenger = distance; 
-
-		if (distance <= nearestPassenger)
-			marker[0].setTitle("This is me!" + " " + "Distance to nearest passenger:" + distance); 
-	}
-}
-
-function markWeiner(vehPos, name, distance)
+function markPassenger(passPos, name)
 {
 	var marker = new google.maps.Marker({
-		position: vehPos,
-		title: name + " " + "distance(miles): " + distance,
-		icon: "weinermobile.png"
+		position: passPos,
+		title: "passenger:" + " " + name + " " + "distance: " + distance,
+		icon: "images/passenger.png"
 	});
+
 	markers.push(marker);
 
 	marker.setMap(map);
@@ -137,17 +124,87 @@ function markWeiner(vehPos, name, distance)
 		infowindow.setContent(marker.title);
 		infowindow.open(map, marker);
 	});
+}
+
+//create markers from json 
+function vehPopulate(parsedData)
+{
+	for (i = 0; i < parsedData.vehicles.length; i++) {
+		var vehPos = new google.maps.LatLng(parsedData.vehicles[i].lat,parsedData.vehicles[i].lng);
+		var name = parsedData.vehicles[i].username;
+		//convert to miles
+		var distance = ((google.maps.geometry.spherical.computeDistanceBetween(vehPos, me)) 
+		 * 0.000621371192);
+
+		if (name == "WEINERMOBILE") {
+			markWeiner(vehPos, name, distance);
+			updateMe(name, distance);
+		}
+		else {
+			markVeh(vehPos, name, distance);
+			updateMe(name,distance);
+		}		
+	}
+}
+//updates Me location (if new vehicle is closest to you)
+function updateMe(name, distance)
+{
+	console.log("vehicle distance::", distance);
+
+	if (name == "WEINERMOBILE") {
+		if (nearestWeiner == 0){
+			nearestWeiner = distance;
+			markers[0].setTitle(markers[0].title + "Distance to nearest WEINERMOBILE:" + distance + "<br>"); 
+			return;
+		}
+
+		if (distance < nearestWeiner){
+			nearestWeiner = distance;
+			markers[0].setTitle(markers[0].title + "Distance to nearest WEINERMOBILE:" + distance + "<br>"); 
+		}
+	}
+
+	else {
+		if (nearestVeh == 0){
+			nearestVeh = distance; 
+			markers[0].setTitle(markers[0].title + " " + "Distance to nearest vehicle:" + distance + "<br>"); 
+			return; 
+		}
+
+		console.log(nearestVeh,"= nearestVeh;", distance, "=distance;" );
+
+		if (distance < nearestVeh){
+			console.log("SECOND IF");
+			nearestVeh = distance; 
+			markers[0].setTitle(markers[0].title + " " + "Distance to nearest vehicle:" + distance + "<br>"); 
+		}
+	}
+}
+
+function markWeiner(vehPos, name, distance)
+{
+	var marker = new google.maps.Marker({
+		position: vehPos,
+		title: "Driver:" + name + " " + "distance(miles): " + distance,
+		icon: "images/weinermobile.png"
+	});
+	markers.push(marker);
+
+	marker.setMap(map);
+
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.setContent(this.title);
+		infowindow.open(map, this);
+	});
 
 }
 
-function markPassenger(vehPos, name, distance)
+function markVeh(vehPos, name, distance)
 {
-	console.log(vehPos);
-
 	var marker = new google.maps.Marker({
 		position: vehPos,
 		title: name + " " + "distance: " + distance,
-		icon: "passenger.png"
+		icon: "images/vehicle.png"
 	});
 	markers.push(marker);
 
