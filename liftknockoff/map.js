@@ -81,23 +81,17 @@ function getJSON() {
 //parameter: JsonData object
 function filterPopulate(parsedData)
 {
-	console.log(parsedData);
-
 	var key = parsedData.vehicles; 	//determine value for populate 
 
-	console.log(key);
 	if (key == undefined)
 		key = 'x';
 
-	if (key == 'x'){	
-		console.log(key);
+	if (key == 'x')
 		passPopulate(parsedData, key); 	
-	}
+	
 
-	else {
-		console.log("yeet");
+	else 
 		vehPopulate(parsedData, key);
-	}
 }
 
 
@@ -119,13 +113,6 @@ function passPopulate(parsedData, key)
 			updateMe(name,distance, key);
 		}		
 	}
-	var tempPos = new google.maps.LatLng(40.748817,-73.985428);
-
-
-	markPassenger(tempPos, "fred", 0);
-	console.log(key, "key");
-	updateMe("fred", 13, key);
-	
 }
 
 function markPassenger(passPos, name, distance)
