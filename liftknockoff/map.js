@@ -172,7 +172,6 @@ function updateMe(name, distance, key)
 	}
 
 	else {
-		
 		if (key == 'x') {
 			if (nearestPass == 0){
 				nearestPass = distance; 
