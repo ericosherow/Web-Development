@@ -145,11 +145,11 @@ function vehPopulate(parsedData, key)
 
 		if (name == "WEINERMOBILE") {
 			markWeiner(vehPos, name, distance);
-			updateMe(name, distance);
+			updateMe(name, distance, key);
 		}
 		else {
 			markVeh(vehPos, name, distance);
-			updateMe(name,distance);
+			updateMe(name,distance, key);
 		}		
 	}
 }
@@ -157,22 +157,35 @@ function vehPopulate(parsedData, key)
 function updateMe(name, distance, key)
 {
 	if (name == "WEINERMOBILE") {
-		if (nearestWeiner == 0){
-			nearestWeiner = distance;
-			markers[0].setTitle("Username:Eosher01" + "<br>" + "Distance to nearest WEINERMOBILE:" + distance 
-				+ "<br>" + "Distance to nearest vehicle:" + nearestVeh); 
+		if (key == 'x'){ //key vehicles is undefined
+			if (nearestWeiner == 0){
+				nearestWeiner = distance;
+				markers[0].setTitle("Username:Eosher01" + "<br>" + "Distance to nearest WEINERMOBILE:" + distance 
+					+ "<br>" + "Distance to nearest passenger:" + nearestPass); 
+			}
+			if (distance < nearestWeiner) {
+				nearestWeiner = distance;
+				markers[0].setTitle("Username:Eosher01" + "<br> " + "Distance to nearest WEINERMOBILE:" + distance 
+					+ "<br>" + "Distance to nearest passenger:" + nearestPass); 
+			}
+		}
+		else{
+			if (nearestWeiner == 0){
+				nearestWeiner = distance;
+				markers[0].setTitle("Username:Eosher01" + "<br>" + "Distance to nearest WEINERMOBILE:" + distance 
+					+ "<br>" + "Distance to nearest vehicle:" + nearestVeh); 
 			return;
 		}
-
-		if (distance < nearestWeiner){
-			nearestWeiner = distance;
-			markers[0].setTitle("Username:Eosher01" + "<br> " + "Distance to nearest WEINERMOBILE:" + distance 
+			if (distance < nearestWeiner){
+				nearestWeiner = distance;
+				markers[0].setTitle("Username:Eosher01" + "<br> " + "Distance to nearest WEINERMOBILE:" + distance 
 				+ "<br>" + "Distance to nearest vehicle:" + nearestVeh);  
+			}
 		}
-	}
+	}	
 
 	else {
-		if (key == 'x') {
+		if (key == 'x') { //key vehicles is undefined
 			if (nearestPass == 0){
 				nearestPass = distance; 
 				markers[0].setTitle("Username:Eosher01" + "<br>" +  "Distance to nearest WEINERMOBILE:" + nearestWeiner 
@@ -187,6 +200,7 @@ function updateMe(name, distance, key)
 			}
 		}
 		else {
+			console.log("kj;lkj;");
 			if (nearestVeh == 0){
 				nearestVeh = distance; 
 				markers[0].setTitle("Username:Eosher01" + "<br>" +  "Distance to nearest WEINERMOBILE:" + nearestWeiner 
@@ -195,6 +209,9 @@ function updateMe(name, distance, key)
 			}
 
 			if (distance < nearestVeh){
+				if (distance == 0)
+					console.log(key);
+				console.log("klj;adklsjf;");
 				nearestVeh = distance; 
 				markers[0].setTitle("Username:Eosher01" + "<br>" + "Distance to nearest WEINERMOBILE:" + nearestWeiner 
 					+ "<br> " + "Distance to nearest vehicle:" + distance + "<br>"); 
