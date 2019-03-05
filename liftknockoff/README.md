@@ -17,11 +17,16 @@ Implemented:
 10.Clicking on a vehicle or passenger marker will display vehicle or passenger username and mile(s) away from you in an info window.
 
 Limitions
-1. The code was tested solely as a passenger. Therefore, only vehicles: car, weinermobile were ever loaded
-2. In a case were no weiner mobile is found, it is possible to see a denotion of weinermobile's distance as 0. This error could not be fixed. 
+1. In a case where either no weiner mobile or vehicle/passenger is found: 
+	a case with only weinermobiles or only vehicles/passengers,
+	 it is possible to see a denotion of distance as 0 on the origin me tag.
+	 This error could not be fixed. 
 
 ------------------------
+
 Special thanks to Ming Chow, Michael Robinson, Juliana Furgala
 ------------------------
-This assignent took aproximately 10hours
+
+This assignent took aproximately 12hours
+
 ------------------------
