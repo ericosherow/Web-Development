@@ -5,7 +5,7 @@
 	var myLng = 0;
 	var me = new google.maps.LatLng(myLat, myLng);
 	var myOptions = {
-		zoom: 13, // The larger the zoom number, the bigger the zoom
+		zoom: 13, 
 		center: me,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
@@ -21,62 +21,63 @@
 		getMyLocation();
 	}
 
-
-	function getMyLocation() {
-		if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
-			navigator.geolocation.getCurrentPosition(function(position) {
-				myLat = position.coords.latitude;
-				myLng = position.coords.longitude;
-				renderMap();
-			});
-		}
-		else {
-			alert("Geolocation is not supported by your web browser.  What a shame!");
-		}
+//gets my location 
+function getMyLocation() {
+	if (navigator.geolocation) { 
+		navigator.geolocation.getCurrentPosition(function(position) {
+			myLat = position.coords.latitude;
+			myLng = position.coords.longitude;
+			renderMap();
+		});
 	}
-	function renderMap() {
-		me = new google.maps.LatLng(myLat, myLng);
-		// Update map and go there...
-		map.panTo(me);
-		
-		marker = new google.maps.Marker({
-			icon: "images/flower.png",
-			position: me,
-			title: "This is me!<br>" 
-		});
-		markers.push(marker);
-
-		marker.setMap(map);
-			
-		// Open info window on click of marker
-		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.setContent(marker.title);
-			infowindow.open(map, marker);
-		});
-
-		getJSON(); 
-
+	else {
+		alert("Geolocation is not supported by your web browser.  What a shame!");
+	}
 }
 
+//render google map with programmer pin
+function renderMap() {
+	me = new google.maps.LatLng(myLat, myLng);
+
+	map.panTo(me);
+	
+	marker = new google.maps.Marker({
+		icon: "images/flower.png",
+		position: me,
+		title: "This is me!<br>",
+		label: " "
+	});
+	markers.push(marker);
+
+	marker.setMap(map);
+		
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.setContent(marker.title);
+		infowindow.open(map, marker);
+	});
+
+	getJSON(); 
+
+}
+//function: perform xml request 
 function getJSON() {
 	var request = new XMLHttpRequest();
 
-	request.open('POST','https://hans-moleman.herokuapp.com/rides', true);	//make request json source 
+	request.open('POST','https://hans-moleman.herokuapp.com/rides', true);
 
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 	request.onreadystatechange = function () {
 		if (request.readyState == 4 && request.status == 200){		
-			parsedData = JSON.parse(request.responseText); //global
-			console.log(parsedData);/*------*/
+			parsedData = JSON.parse(request.responseText); 
 			filterPopulate(parsedData);
 		}	
 	};
-	//SEND LAT/LONG/USERNAME 
-	request.send("username=CtmjKvK9&lat=" + myLat + "&lng=" + myLng); //makes request ready 
+	request.send("username=CtmjKvK9&lat=" + myLat + "&lng=" + myLng);
 }
 
-//deterine whether to populate passengers, vehicles, or both 
+//Function: deterine whether to populate passengers, vehicles, or both 
+//parameter: JsonData object
 function filterPopulate(parsedData)
 {
 	if (parsedData.vehicles !== 'undefined')
@@ -93,7 +94,6 @@ function passPopulate()
 	for (i = 0; i < parsedData.passengers.length; i++) {
 		var passPos = new google.maps.LatLng(parsedData.passengers[i].lat,parsedData.passengers[i].lng);
 		var name = parsedData.passengers[i].username;
-		//convert to miles
 		var distance = ((google.maps.geometry.spherical.computeDistanceBetween(passPos, me)) 
 		 * 0.000621371192);
 
@@ -132,7 +132,7 @@ function vehPopulate(parsedData)
 	for (i = 0; i < parsedData.vehicles.length; i++) {
 		var vehPos = new google.maps.LatLng(parsedData.vehicles[i].lat,parsedData.vehicles[i].lng);
 		var name = parsedData.vehicles[i].username;
-		//convert to miles
+	
 		var distance = ((google.maps.geometry.spherical.computeDistanceBetween(vehPos, me)) 
 		 * 0.000621371192);
 
@@ -153,30 +153,36 @@ function updateMe(name, distance)
 	if (name == "WEINERMOBILE") {
 		if (nearestWeiner == 0){
 			nearestWeiner = distance;
-			markers[0].setTitle(markers[0].title + "Distance to nearest WEINERMOBILE:" + distance + "<br>"); 
+			markers[0].setTitle("Username:Eosher01" + "<br>" + "Distance to nearest WEINERMOBILE:" + distance 
+				+ "<br>" + "Distance to nearest vehicle:" + nearestVeh); 
 			return;
 		}
 
 		if (distance < nearestWeiner){
 			nearestWeiner = distance;
-			markers[0].setTitle(markers[0].title + "Distance to nearest WEINERMOBILE:" + distance + "<br>"); 
+			markers[0].setTitle("Username:Eosher01" + "<br> " + "Distance to nearest WEINERMOBILE:" + distance 
+				+ "<br>" + "Distance to nearest vehicle:" + nearestVeh);  
 		}
 	}
 
 	else {
 		if (nearestVeh == 0){
 			nearestVeh = distance; 
-			markers[0].setTitle(markers[0].title + " " + "Distance to nearest vehicle:" + distance + "<br>"); 
+			markers[0].setTitle("Username:Eosher01" + "<br>" +  "Distance to nearest WEINERMOBILE:" + nearestWeiner 
+					+ "<br> " + "Distance to nearest vehicle:" + distance + "<br>"); 
 			return; 
 		}
 
 		if (distance < nearestVeh){
 			nearestVeh = distance; 
-			markers[0].setTitle(markers[0].title + " " + "Distance to nearest vehicle:" + distance + "<br>"); 
+			markers[0].setTitle("Username:Eosher01" + "<br>" + "Distance to nearest WEINERMOBILE:" + nearestWeiner 
+					+ "<br> " + "Distance to nearest vehicle:" + distance + "<br>"); 
 		}
 	}
 }
 
+
+//creates and adds weinermobile markers to map 
 function markWeiner(vehPos, name, distance)
 {
 	var marker = new google.maps.Marker({
@@ -194,13 +200,13 @@ function markWeiner(vehPos, name, distance)
 	});
 
 }
-
+//creates and adds car markers to map
 function markVeh(vehPos, name, distance)
 {
 	var marker = new google.maps.Marker({
 		position: vehPos,
 		title: name + " " + "distance: " + distance,
-		icon: "images/vehicle.png"
+		icon: "images/car.png"
 	});
 	markers.push(marker);
 
