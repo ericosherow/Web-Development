@@ -27,6 +27,6 @@ Limitions
 Special thanks to Ming Chow, Michael Robinson, Juliana Furgala
 ------------------------
 
-This assignent took aproximately 12hours
+This assignent took aproximately 16-20hours
 
 ------------------------
