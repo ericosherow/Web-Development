@@ -200,7 +200,6 @@ function updateMe(name, distance, key)
 			}
 		}
 		else {
-			console.log("kj;lkj;");
 			if (nearestVeh == 0){
 				nearestVeh = distance; 
 				markers[0].setTitle("Username:Eosher01" + "<br>" +  "Distance to nearest WEINERMOBILE:" + nearestWeiner 
@@ -209,9 +208,6 @@ function updateMe(name, distance, key)
 			}
 
 			if (distance < nearestVeh){
-				if (distance == 0)
-					console.log(key);
-				console.log("klj;adklsjf;");
 				nearestVeh = distance; 
 				markers[0].setTitle("Username:Eosher01" + "<br>" + "Distance to nearest WEINERMOBILE:" + nearestWeiner 
 					+ "<br> " + "Distance to nearest vehicle:" + distance + "<br>"); 
