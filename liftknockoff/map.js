@@ -64,7 +64,7 @@ function renderMap() {
 function getJSON() {
 	var request = new XMLHttpRequest();
 
-	request.open('POST','https://hans-moleman.herokuapp.com/rides', true);
+	request.open('POST','https://mysterious-mountain-70105.herokuapp.com/rides', true);
 
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
