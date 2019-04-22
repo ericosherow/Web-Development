@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eric Osherow Resume</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		@font-face{
+	    src: url("SIMPLIFICA/SIMPLIFICA Typeface.ttf");
+	    font-family: SIMPLIFICA;
+	   }
+		/*wrap styles*/
+		.header {
+			position: absolute;
+			/*background-color:yellow;*/
+			width: 100%;
+			/*z-index: -1;*/
+		}
+		.footer{
+			/**/
+			width:100%;
+		} 
+		.middle-wrap {
+			width: 100%;
+			/*background-color: red;*/
+			/*z-index: -1;*/
+		}
+
+		.bottom-wrap{
+
+		}
+
+		/*text styles*/
+		.title-text{
+			text-align: center;
+			color:black;
+			font-family:Simplifica;
+			font-size:30px;
+			font-weight: bold;
+		}
+		.body-text{	
+			margin-top: 100px;
+ 
+  			margin-left: 80px;
+			color:black;
+			font-family:Simplifica;
+			font-size:30px;
+			display: block;
+			text-align: left;
+		}
+
+		
+
+				 /* Dropdown Button */
+		.dropbtn {
+		  background-color: transparent;
+		  color: transparent;
+		  padding: 16px;
+		  font-size: 16px;
+		  border: black;
+		}
+
+		/* The container <div> - needed to position the dropdown content */
+		.dropdown {
+		  position: absolute;
+		  top: 1%;
+		  left: 92.5%;
+		  transition: 1.0s;
+		}
+
+		/* Dropdown Content (Hidden by Default) */
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: white;
+		  opacity: 1;
+		  right: 0;
+		  min-width: 160px;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
+		}
+
+		/* Links inside the dropdown */
+		.dropdown-content a {
+		  color: black;
+		  font-family:Simplifica;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+
+
+		/* Change color of dropdown links on hover */
+		.dropdown-content a:hover {background-color: grey;}
+
+		/* Show the dropdown menu on hover */
+		.dropdown:hover .dropdown-content {display: block;}
+
+		/* Change the background color of the dropdown bar when the dropdown content is shown */
+		.dropdown:hover .bar1 {transition:0.2s;background-color:#00b4ff;}
+		.dropdown:hover .bar2 {transition:0.5s;background-color:#00b4ff;}
+		.dropdown:hover .bar3 {transition:0.8s;background-color:#00b4ff;}
+
+
+		/*menu bar Container*/
+		.container {
+		  display: inline-block;
+		  cursor: pointer;
+		}
+		/*subbars*/
+		.bar1, .bar2, .bar3 {
+		  width: 40px;
+		  height: 3px;
+		  background-color: #FF00B4;
+		  margin: 8px 0;
+		  transition: 0.4s;
+		}
+
+		.line {
+		  height="210"; 
+		  width="500";
+		  stroke:rgb(255,0,0);
+		  stroke-width:2;  
+		}
+
+
+		/* Rotate first bar */
+		.change .bar1 {
+		  -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+		  transform: rotate(-45deg) translate(-9px, 6px) ;
+		}
+
+		/* Fade out the second bar */
+		.change .bar2 {
+		  opacity: 0;
+		}
+
+		/* Rotate last bar */
+		.change .bar3 {
+		  -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+		  transform: rotate(45deg) translate(-8px, -8px) ;
+		}
+
+
+	</style>
+
+
+<body>
+	<body style="background-color:#cec5b8;">
+
+		<div class="title-text" style="margin-top: 10px;">
+			Assignment4: Security<br> Eric.Osherow<br>
+			<div>
+
+	<div class="middle-wrap">
+		<div class="body-text" style="font-weight: bold; font-size: 50px; left: 200px">
+
+			<br>Introduction<br>
+
+			
+				<div class="body-text" style=" font-style: normal;margin-top: 10px;  margin-bottom: 10px;">
+					The product being investigated is a server-side web application that uses Heroku, Node.JS, and the express framework. The program itself utilizes cross origin resource sharing to read and write data to and from a mongodb server to a web based google maps application. This application utilizes the JSON API to efficiently send data.  <br> 
+				</div>
+			</div>
+			
+				<div class="body-text" style="margin-top: 20px; margin-bottom: 0px;">
+			
+			<br>Methodology
+			<div class="body-text" style="font-style: italic; font-size: 40px; margin-top: 10px;">
+				The core methodology being implemented is based in exploitation of the web apps usage of cors. By focusing on this methodology, the investigation will focus on the transfer, storage, and read/writing of data. Tools being used will be shell scripts, bash scripts, npm, and web proxies. 	
+				
+			</div>
+			<br>
+			Abstract of Findings
+			<div class="body-text" style="font-style: italic; font-size: 40px; margin-top: 10px;">
+				In overview, three major vulnerabilities were found. Through exploration of XXS, cross cite scripting, this investigation found the ability to access data not authorized from original input. Through script injection, this investigation found that the database can be easily broken through continue request and posting of data. Through exploitation of older packages, this investigation found that the app was vulnerable to corrupted packages. Through, usage of proxy, this investigation found that the web application was vulnerable to proxy attack and javascript injection. 			   	 
+		</div>		<!-- body text***top -->
+
+		ISSUES
+
+		<div class="body-text" style=" font-style: normal;margin-top: 10px;  margin-bottom: 10px;">
+					<u1>
+						<li> Issue 1: XXS attack</li>
+					</u1>
+					<u1>
+						<li>Location: Post route   
+						</li>
+					</u1>
+					<u1>
+						<li>High Severity</li>
+					</u1>
+					<u1>
+						<li>Description of issue. How did you find it? A screenshot of problem is excellent.
+						By exploiting the post route in the users index.js, this investigation accessed secured data.</li>
+					</u1>
+				</div>
+			<img src="IMG/xxs.png">
+
+				<br>
+				<br>
+
+
+
+		<div class="body-text" style=" font-style: normal;margin-top: 10px;  margin-bottom: 10px;">
+					<u1>
+						<li>Issue 2: Proxy Attack </li>
+					</u1>
+					<u1>
+						<li>Location: Get request  
+						</li>
+					</u1>
+					<u1>
+						<li>Medium Severity </li>
+					</u1>
+					<u1>
+						<li>Description of issue. How did you find it? A screenshot of problem is excellent.
+						By exploiting the get route in the users index.js, this investigation halted and inject html in the web application:</li>
+					</u1>
+				</div>
+			<img src="IMG/proxy.png">
+
+			<br>
+				<br>
+
+
+		<div class="body-text" style=" font-style: normal;margin-top: 10px;  margin-bottom: 10px;">
+					<u1>
+						<li> Issue3: exploitation of non-supported pages </li>
+					</u1>
+					<u1>
+						<li>Location: package.json 
+						</li>
+					</u1>
+					<u1>
+						<li>High Severity</li>
+					</u1>
+					<u1>
+						<li>Description of issue. How did you find it? A screenshot of problem is excellent.
+						By exploiting older dependencies, one can find bugs in older versions of a package </li>
+					</u1>
+				</div>
+			<img src="IMG/package.png">
+
+				<br>
+				<br>
+
+
+		<div class="body-text" style=" font-style: normal;margin-top: 10px;  margin-bottom: 10px;">
+					<u1>
+						<li> Issue4: serving viruses and bugs in npm install 
+ </li>
+					</u1>
+					<u1>
+						<li>Location: general design, packages, etc. 
+						</li>
+					</u1>
+					<u1>
+						<li>High Severity</li>
+					</u1>
+					<u1>
+						<li>Description of issue. How did you find it? A screenshot of problem is excellent.
+						By exploiting the post a lack of package validation, one can download harmful packages to application  </li>
+					</u1>
+				</div>
+				<br>
+				<br>
+
+
+		Conclusion
+			<div class="body-text" style="font-style: italic; font-size: 40px; margin-top: 10px;">
+				This app is generally well projected. By requiring validator, it is not easy to break the app. However, the app is vulnerable to many common bugs. It should be redesigned to account for the above security vulnerabilities. 			   	 
+		</div>		<!-- body text***top -->
+		References
+			<div class="body-text" style="font-style: italic; font-size: 40px; margin-top: 10px;">
+				-https://portswigger.net/burp/documentation <br>
+				-http://www.veracode.com/security/xss<br>
+				-https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project<br>
+		</div>		<!-- body text***top -->
+
+
+	</div>
+
+
+	
+</body>
+
+
+</html>
